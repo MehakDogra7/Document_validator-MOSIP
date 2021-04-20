@@ -49,6 +49,7 @@ def hello():
         length = len(y)
         attr = ""
         valid = 0
+        tflag = 0
 
         for property in y:
             flag = 0
@@ -64,15 +65,17 @@ def hello():
                     if (propertyEvaluated.split() == propertyOriginal.split()):
                         valid = valid + 1
                     flag=1
+
                 else:
                     continue
             if(flag != 1):
+                tflag=1
                 attr = property + "/" + attr
 
 
         percentageOfAccuracy = (valid * 100 / length)
 
-        if(flag != 1):
+        if(tflag == 1):
                 return jsonify(error=attr + " attributes does not exists",accuracy=percentageOfAccuracy,code="420")
         else:
                 return jsonify(accuracy=percentageOfAccuracy)
